@@ -778,10 +778,10 @@ public class Bookie extends BookieCriticalThread {
                 @Override
                 public void startCheckpoint(Checkpoint checkpoint) {
                     /*
-                     * in the case of entryLogPerLedgerEnabled, LedgerStorage
+                     * in the case of entrylogperledgerenabled, ledgerstorage
                      * dont drive checkpoint logic, but instead it is done
-                     * periodically by SyncThread. So startCheckpoint which
-                     * will be called by LedgerStorage will be no-op.
+                     * periodically by syncthread. so startcheckpoint which
+                     * will be called by ledgerstorage will be no-op.
                      */
                 }
 

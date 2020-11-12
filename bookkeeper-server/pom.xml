@@ -17,6 +17,12 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <!-- here add jacocco reporting
+  <properties>
+    <sonar.coverage.jacoco.xmlReportPaths>bookkeeper-server/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
+  -->
+
   <parent>
     <artifactId>bookkeeper</artifactId>
     <groupId>org.apache.bookkeeper</groupId>
@@ -40,6 +46,7 @@
       <artifactId>bookkeeper-proto</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.bookkeeper</groupId>
       <artifactId>bookkeeper-tools-framework</artifactId>
@@ -219,6 +226,8 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
         <configuration>
+          <!-- Added in order to test the tests of this single module -->
+          <skipTests>false</skipTests>
           <trimStackTrace>false</trimStackTrace>
           <properties>
             <property>
@@ -252,8 +261,55 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Pitest mutation testing -->
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.5.2</version>
+        <!--FIX configs for mutation coverage -->
+        <configuration>
+          <targetClasses>
+            <param>org.apache.bookkeeper.client.DeleteMePlease*</param>
+          </targetClasses>
+          <targetTests>
+            <param>org.apache.bookkeeper.client.PitTest*</param>
+          </targetTests>
+        </configuration>
+        <!-- execution, qui inserire eventuali altri parametri -->
+        <executions>
+          <execution>
+            <goals>
+              <goal>mutationCoverage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Generating JacocoReport -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <!-- attached to Maven test phase -->
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>vertx-http-server</id>

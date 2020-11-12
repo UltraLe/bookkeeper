@@ -75,6 +75,7 @@ public class TestVertxHttpServer {
         assertTrue(httpServer.startServer(0));
         int port = httpServer.getListeningPort();
         HttpResponse httpResponse = send(getUrl(port, HttpRouter.GC), HttpServer.Method.GET);
+        System.out.println("\n\nHEREEEEEEEE\n\n"+httpResponse.responseBody);
         assertEquals(HttpServer.StatusCode.OK.getValue(), httpResponse.responseCode);
         httpResponse = send(getUrl(port, HttpRouter.GC), HttpServer.Method.POST);
         assertEquals(HttpServer.StatusCode.OK.getValue(), httpResponse.responseCode);
