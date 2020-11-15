@@ -5,11 +5,14 @@ jdk:
 # SKipping entirely the automatin install phare done by travis
 install: true
 
+# Skip automatic git pull of all submodules
+git:
+  submodules: false
+
 addons:
   sonarcloud:
     organization: "ultrale"
     token: 601e60278def586e544dfb3ff19b6087c9c69e8d
 
 script:
-  - mvn clean verify -pl bookkeeper-server -Dtest=PitTest sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper
-  #- mvn clean -pl bookkeeper-server -Dtests=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent verify org.pitest:pitest-maven:mutationCoverage sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -pl bookkeeper-server -Dtest=PitTest
