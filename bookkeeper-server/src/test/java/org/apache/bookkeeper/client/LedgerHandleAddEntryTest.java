@@ -15,19 +15,25 @@ public class LedgerHandleAddEntryTest extends LedgerHandleTestClass {
     private byte[] entryToAdd;
     ArrayList<byte[]> entries = new ArrayList<byte[]>();
 
+    public static final int BIG_DATA_MB = 100;
+
     @Parameterized.Parameters
     public static Collection<byte[]> getParameters(){
         Random r = new Random(1234567);
         //inserting random bytes, at group pf 30
         byte[] data = new byte[30];
+        byte[] emptyData = new byte[0];
+        byte[] bigData = new byte[BIG_DATA_MB*1000000];
 
-        //param1 = random byte array
         r.nextBytes(data);
+        r.nextBytes(bigData);
         ArrayList<byte[]> parameters = new ArrayList<>();
-        parameters.add(data);
 
-        //param2 = null
+
+        parameters.add(data);
         parameters.add(null);
+        parameters.add(emptyData);
+        parameters.add(bigData);
 
         return parameters;
     }
@@ -40,6 +46,8 @@ public class LedgerHandleAddEntryTest extends LedgerHandleTestClass {
     public void addEntryTest() {
 
         long entryId;
+
+        LOG.info("Length of data: "+entryToAdd.length);
 
         try {
             LedgerHandle lh = bkc.createLedger(3, 1, digestType, ledgerPassword);
