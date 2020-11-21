@@ -13,7 +13,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(value= Parameterized.class)
-public class LedgerHandlerReadEntryTest extends LedgerHandleTestClass {
+public class LedgerHandleReadEntryTest extends UtilTestClass {
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -25,7 +25,7 @@ public class LedgerHandlerReadEntryTest extends LedgerHandleTestClass {
 
     private ArrayList<byte[]> writtenEntries;
 
-    public LedgerHandlerReadEntryTest(List<Object> patameters){
+    public LedgerHandleReadEntryTest(List<Object> patameters){
 
         this.firstEntry = (int)patameters.get(0);
         this.lastEntry = (int)patameters.get(1);
@@ -93,6 +93,40 @@ public class LedgerHandlerReadEntryTest extends LedgerHandleTestClass {
             assertEquals(origEntry, retrEntry);
         }
 
+    }
+
+    @Test
+    public void readLastEntryTest() throws BKException, InterruptedException {
+
+        LedgerHandle lh = bkc.createLedger(digestType, ledgerPassword);
+
+        //Scrittura di numEntriesToWrite entry
+        for (int i = 0; i < numEntriesToWrite; i++) {
+            ByteBuffer entry = ByteBuffer.allocate(4);
+            entry.putInt(rng.nextInt());
+            entry.position(0);
+
+            writtenEntries.add(entry.array());
+            lh.addEntry(entry.array());
+        }
+
+        LedgerEntry lastEntry = null;
+        try {
+            lastEntry = lh.readLastEntry();
+        } catch (Exception e) {
+            //Controllo la gestione di eventuali errori dovuti a combinazioni sbagliate tra
+            //lastEntry e firstEntry, che devono essere gestite da bookkeeper
+            assertEquals("org.apache.bookkeeper.client.BKException.BKIncorrectParameterException", e.getClass().getCanonicalName());
+            return;
+        }
+
+        //prelevo l'ultima entry aggiunta
+        ByteBuffer origbb = ByteBuffer.wrap(writtenEntries.get((int)this.lastEntry));
+        Integer origEntry = origbb.getInt();
+
+        ByteBuffer result = ByteBuffer.wrap(lastEntry.getEntry());
+        Integer retrEntry = result.getInt();
+        assertEquals(origEntry, retrEntry);
     }
 
 }

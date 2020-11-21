@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class LedgerHandleGetNumBookiesTest extends LedgerHandleTestClass {
+public class LedgerHandleGetNumBookiesTest extends UtilTestClass {
 
 
     /*

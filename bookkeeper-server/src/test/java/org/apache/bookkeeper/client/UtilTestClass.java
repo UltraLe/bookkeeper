@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class LedgerHandleTestClass extends BookKeeperClusterTestCase {
+public abstract class UtilTestClass extends BookKeeperClusterTestCase {
 
     public static final int numBookies = 3;
     final boolean improvedTestSuite = false;
@@ -29,7 +29,7 @@ public abstract class LedgerHandleTestClass extends BookKeeperClusterTestCase {
     ArrayList<byte[]> entries2; // generated entries
      */
 
-    public LedgerHandleTestClass() {
+    public UtilTestClass() {
         super(numBookies);
     }
 
