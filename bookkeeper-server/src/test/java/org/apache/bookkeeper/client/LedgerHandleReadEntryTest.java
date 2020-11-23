@@ -1,11 +1,8 @@
 package org.apache.bookkeeper.client;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 
 import java.nio.ByteBuffer;
 import java.util.*;
@@ -14,9 +11,6 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(value= Parameterized.class)
 public class LedgerHandleReadEntryTest extends UtilTestClass {
-
-    @Rule
-    public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     private long firstEntry;
     private long lastEntry;
@@ -32,8 +26,6 @@ public class LedgerHandleReadEntryTest extends UtilTestClass {
 
         writtenEntries = new ArrayList<>();
         rng = new Random();
-
-        System.out.println("HERE: "+firstEntry+" "+ lastEntry);
     }
 
 
