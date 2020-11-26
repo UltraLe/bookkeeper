@@ -16,4 +16,6 @@ addons:
 
 script:
   # TODO try with ,. and -e flag to see full stack trace
-  - mvn clean verify -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper
+  # This shold work
+  #- mvn clean verify -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false
+  - mvn clean verify -Dtest=PitTest ,.org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -e
