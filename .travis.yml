@@ -6,8 +6,8 @@ jdk:
 install: true
 
 # Skip automatic git pull of all submodules
-git:
-  submodules: false
+#git:
+#  submodules: false
 
 addons:
   sonarcloud:
@@ -16,4 +16,4 @@ addons:
 
 script:
   # This shold work
-  - mvn clean -pl .,bookkeeper-server -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -e
+  - mvn clean -pl .,bookkeeper-server -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -X
