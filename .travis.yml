@@ -3,7 +3,7 @@ jdk:
   - openjdk8
 
 # SKipping entirely the automatic install phase done by travis
-install: true
+#install: true
 
 # Skip automatic git pull of all submodules
 #git:
