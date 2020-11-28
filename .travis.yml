@@ -2,7 +2,7 @@ language: java
 jdk:
   - openjdk8
 
-# SKipping entirely the automatin install phare done by travis
+# SKipping entirely the automatic install phase done by travis
 install: true
 
 # Skip automatic git pull of all submodules
@@ -17,6 +17,6 @@ addons:
 script:
   # TODO try with ,. and -e flag to see full stack trace
   # This shold work
-  #- mvn clean verify -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -e
-  - mvn clean verify -pl .,bookkeeper-server -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -X
+  - mvn clean verify -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -e
+  #- mvn clean verify -pl .,bookkeeper-server -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -X
   #- mvn clean verify -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -e
