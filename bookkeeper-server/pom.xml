@@ -231,7 +231,7 @@
           <forkedProcessTimeoutInSeconds>1800</forkedProcessTimeoutInSeconds>
           <!-- we want build to complete even in case of failures -->
           <testFailureIgnore>true</testFailureIgnore>
-          <skipTests>false</skipTests>
+          <!--<skipTests>false</skipTests>-->
           <!-- Ends of things to add in order to execute a single test/module build -->
 
           <trimStackTrace>false</trimStackTrace>
