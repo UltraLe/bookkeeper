@@ -16,4 +16,4 @@ addons:
 
 script:
   - mvn clean -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -X
-  #- mvn clean -pl .,bookkeeper-server -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -X
+  ##- mvn clean -pl .,bookkeeper-server -Dtest=PitTest org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper -DfailIfNoTests=false -X
