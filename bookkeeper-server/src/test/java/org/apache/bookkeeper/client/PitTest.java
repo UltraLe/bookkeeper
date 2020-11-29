@@ -5,6 +5,9 @@ import org.junit.Test;
 
 public class PitTest {
 
+    //Make only one test, and buld only its module ! FINALLY !!
+    //mvn -pl bookkeeper-server -am verify -Dtest=PitTest test -DfailIfNoTests=false
+
     @Test
     public void simpleTest(){
 
