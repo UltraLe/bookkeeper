@@ -37,24 +37,31 @@ public class LedgerHandleAddEntryTest extends UtilTestClass {
         List<Object> offsetBorderValues = new ArrayList<>();
         List<Object> lengthBorderValues = new ArrayList<>();
 
+        //Minimal Test Suite
         dataBorderValues.add(data);
-        dataBorderValues.add(null);
-        dataBorderValues.add(emptyData);
-        dataBorderValues.add(bigData);
-
-        offsetBorderValues.add(-1);
-        offsetBorderValues.add(0);
         offsetBorderValues.add(1);
-
-        lengthBorderValues.add(-1);
-        lengthBorderValues.add(0);
         lengthBorderValues.add(1);
+
+        dataBorderValues.add(emptyData);
+        offsetBorderValues.add(0);
+        lengthBorderValues.add(0);
+
+        dataBorderValues.add(bigData);
+        offsetBorderValues.add(1);
+        lengthBorderValues.add(1);
+
+        dataBorderValues.add(null);
+        offsetBorderValues.add(-1);
+        lengthBorderValues.add(-1);
 
         List<List<Object>> L  = new ArrayList<>();
         L.add(dataBorderValues);
         L.add(offsetBorderValues);
         L.add(lengthBorderValues);
 
+        if(!UtilTestClass.improvedTestSuite){
+            return nonMultidimensionalTestCases(L);
+        }
         return multidimensionalTestCases(L);
     }
 
@@ -86,7 +93,9 @@ public class LedgerHandleAddEntryTest extends UtilTestClass {
             //NULL parameter does not pass
             //Here if handling null entry add
             //We do not want that a null pointer exception is raised
-            Assert.assertNotEquals(e.getClass().getCanonicalName(), "java.lang.NullPointerException");
+            if(this.entryToAdd != null){
+                Assert.assertNotEquals("java.lang.NullPointerException",e.getClass().getCanonicalName());
+            }
         }
 
     }

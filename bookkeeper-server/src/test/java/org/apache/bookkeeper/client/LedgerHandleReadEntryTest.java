@@ -24,7 +24,6 @@ public class LedgerHandleReadEntryTest extends UtilTestClass {
         this.firstEntry = (int)patameters.get(0);
         this.lastEntry = (int)patameters.get(1);
 
-        writtenEntries = new ArrayList<>();
         rng = new Random();
     }
 
@@ -32,28 +31,34 @@ public class LedgerHandleReadEntryTest extends UtilTestClass {
     @Parameterized.Parameters
     public static Collection<List<Object>> getParameters(){
 
-        List<Object> borderValues1 = new ArrayList<>();
-        List<Object> borderValues2 = new ArrayList<>();
+        List<Object> firstEntry = new ArrayList<>();
+        List<Object> lastEntry = new ArrayList<>();
 
-        borderValues1.add(-1);
-        borderValues1.add(0);
-        borderValues1.add(1);
+        //Minimal test suite
+        firstEntry.add(1);
+        lastEntry.add(1);
 
-        borderValues2.add(-1);
-        borderValues2.add(0);
-        borderValues2.add(1);
+        firstEntry.add(-1);
+        lastEntry.add(-1);
 
-        List<List<Object>> L  = new ArrayList<>();
-        L.add(borderValues1);
-        L.add(borderValues2);
+        firstEntry.add(0);
+        lastEntry.add(0);
 
-        return multidimensionalTestCases(L);
+        List<List<Object>> parameters  = new ArrayList<>();
+        parameters.add(firstEntry);
+        parameters.add(lastEntry);
+
+        if(!UtilTestClass.improvedTestSuite){
+            return nonMultidimensionalTestCases(parameters);
+        }
+        return multidimensionalTestCases(parameters);
     }
 
     @Test
     public void readEntriesTest() throws BKException, InterruptedException {
 
         LedgerHandle lh = bkc.createLedger(digestType, ledgerPassword);
+        writtenEntries = new ArrayList<>();
 
         //Scrittura di numEntriesToWrite entry
         for (int i = 0; i < numEntriesToWrite; i++) {
@@ -91,6 +96,7 @@ public class LedgerHandleReadEntryTest extends UtilTestClass {
     public void readLastEntryTest() throws BKException, InterruptedException {
 
         LedgerHandle lh = bkc.createLedger(digestType, ledgerPassword);
+        writtenEntries = new ArrayList<>();
 
         //Scrittura di numEntriesToWrite entry
         for (int i = 0; i < numEntriesToWrite; i++) {
@@ -113,7 +119,7 @@ public class LedgerHandleReadEntryTest extends UtilTestClass {
         }
 
         //prelevo l'ultima entry aggiunta
-        ByteBuffer origbb = ByteBuffer.wrap(writtenEntries.get((int)this.lastEntry));
+        ByteBuffer origbb = ByteBuffer.wrap(writtenEntries.get((int) (numEntriesToWrite -1)));
         Integer origEntry = origbb.getInt();
 
         ByteBuffer result = ByteBuffer.wrap(lastEntry.getEntry());

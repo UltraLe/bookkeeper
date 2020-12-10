@@ -58,17 +58,23 @@ public class BookkeeperAdminReadEntriesTest extends UtilTestClass {
         List<Object> le = new ArrayList<>();
         List<Object> fe = new ArrayList<>();
 
+        //Minimal Test suite
         le.add(-1);
-        le.add(0);
-        le.add(1);
-
         fe.add(-1);
-        fe.add(0);
+
+        le.add(1);
         fe.add(1);
+
+        le.add(0);
+        fe.add(0);
 
         List<List<Object>> L  = new ArrayList<>();
         L.add(le);
         L.add(fe);
+
+        if(!UtilTestClass.improvedTestSuite){
+            return nonMultidimensionalTestCases(L);
+        }
 
         return multidimensionalTestCases(L);
     }

@@ -10,24 +10,13 @@ import java.util.List;
 public abstract class UtilTestClass extends BookKeeperClusterTestCase {
 
     public static final int numBookies = 3;
-    final boolean improvedTestSuite = false;
+    public static final boolean improvedTestSuite = false;
 
     static final Logger LOG = LoggerFactory
             .getLogger(BookieWriteLedgerTest.class);
     final BookKeeper.DigestType digestType = BookKeeper.DigestType.CRC32;
     final byte[] ledgerPassword = "pwd".getBytes();
 
-    /*
-    Enumeration<LedgerEntry> ls;
-
-    // test related variables
-    int numEntriesToWrite = 100;
-    int maxInt = Integer.MAX_VALUE;
-
-    Random rng; // Random Number Generator
-    ArrayList<byte[]> entries1; // generated entries
-    ArrayList<byte[]> entries2; // generated entries
-     */
 
     public UtilTestClass() {
         super(numBookies);
@@ -54,5 +43,37 @@ public abstract class UtilTestClass extends BookKeeperClusterTestCase {
             cartesianProducts.add(new ArrayList<>());
         }
         return cartesianProducts;
+    }
+
+    /*
+        Method used to define the initial test suite, in order to not overload it.
+        Given a list of objects of the same sizes, this method return the lists of all the parameters used in position i.
+     */
+    public static List<List<Object>> nonMultidimensionalTestCases(List<List<Object>> inputLists){
+
+        List<Object> paramAtSamePosition;
+        List<List<Object>> testCases = new ArrayList<>();
+
+        //all the lists has to have te same size
+        int prev = inputLists.get(0).size();
+        for(int i = 1; i < inputLists.size(); ++i){
+            if(inputLists.get(i).size() != prev){
+                return null;
+            }
+            prev = inputLists.get(i).size();
+        }
+
+        for(int i = 0; i < inputLists.get(0).size(); ++i){
+
+            paramAtSamePosition = new ArrayList<>();
+
+            for(int j = 0; j < inputLists.size(); ++j){
+                paramAtSamePosition.add(inputLists.get(j).get(i));
+            }
+
+            testCases.add(paramAtSamePosition);
+        }
+
+        return testCases;
     }
 }

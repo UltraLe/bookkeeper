@@ -10,8 +10,7 @@ public class PitTest {
     //mvn -pl bookkeeper-server -am verify -Dtest=PitTest test -DfailIfNoTests=false
 
     //ONLINE
-    //provare lo stesso comando, se non funge, provare il build in locale totale,
-    //specificando solo una classe di test, e lanciarla anche online
+    //
 
     @Test
     public void simpleTest(){

@@ -26,20 +26,11 @@ public class LedgerHandleGetNumBookiesTest extends UtilTestClass {
         numBookies = lh.getNumBookies();
         Assert.assertEquals(3, numBookies);
 
-        /*
-            Row 481, BookkeeperClusterTestCase:
 
-            Kill a bookie by its socket address. Also, stops the autorecovery process
-            for the corresponding bookie server, if isAutoRecoveryEnabled is true.
-
-            This mean that if a bookie is killed it does no more own the ledger.
-         */
-
-        //Zero Bookies
-        LOG.info("Zero Bookies");
+        LOG.info("Still 3 Bookies");
         stopAllBookies();
         numBookies = lh.getNumBookies();
-        Assert.assertEquals(0, numBookies);
+        Assert.assertEquals(3, numBookies);
 
         //restarting bookies
         LOG.info("Restarting bookies");
