@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class UtilTestClass extends BookKeeperClusterTestCase {
 
     public static final int numBookies = 3;
-    public static final boolean improvedTestSuite = false;
+    public static final boolean improvedTestSuite = true;
 
     static final Logger LOG = LoggerFactory
             .getLogger(BookieWriteLedgerTest.class);

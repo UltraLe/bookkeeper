@@ -1,14 +1,22 @@
 package org.apache.bookkeeper.client;
 
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.BDDMockito;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.nio.ByteBuffer;
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(value= Parameterized.class)
 public class LedgerHandleAddEntryTest extends UtilTestClass {
@@ -20,6 +28,7 @@ public class LedgerHandleAddEntryTest extends UtilTestClass {
     private static List<byte[]> dataParams = new ArrayList<>();
 
     public static final int BIG_DATA_MB = 100;
+
 
 
     @Parameterized.Parameters
@@ -112,7 +121,7 @@ public class LedgerHandleAddEntryTest extends UtilTestClass {
             //NULL parameter does not pass
             //Here if handling null entry add
             //We do not want that a null pointer exception is raised
-            Assert.assertNotEquals(e.getClass().getCanonicalName(), "java.lang.NullPointerException");
+            Assert.assertNotEquals("java.lang.NullPointerException", e.getClass().getCanonicalName());
         }
     }
 }

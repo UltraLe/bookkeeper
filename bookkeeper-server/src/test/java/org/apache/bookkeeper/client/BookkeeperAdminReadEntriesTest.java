@@ -80,7 +80,7 @@ public class BookkeeperAdminReadEntriesTest extends UtilTestClass {
     }
 
     @Test
-    public void readEntriesTest() throws BKException, InterruptedException {
+    public void readEntriesTest() {
 
         Iterable<LedgerEntry> readEntries = null;
         try {
@@ -105,6 +105,5 @@ public class BookkeeperAdminReadEntriesTest extends UtilTestClass {
 
     }
 
-    //TODO, provare last entry > first entry, ai test migliorati.
 
 }
