@@ -79,4 +79,21 @@ public class BookkKeeperAdminImprovedTest extends UtilTestClass {
         }
     }
 
+    @Test
+    public void readEntriesLedgerIdNegativeTest() throws InterruptedException, BKException, IOException {
+
+        bkAdmin = new BookKeeperAdmin(zkUtil.getZooKeeperConnectString());
+
+        LedgerHandle lh = bkc.createLedger(digestType, ledgerPassword);
+        int negativeLedgerId = -1;
+        lh.addEntry("someData".getBytes());
+
+        try {
+            bkAdmin.readEntries(negativeLedgerId,0, 1);
+        } catch (Exception e) {
+            assertEquals("java.lang.IllegalArgumentException", e.getClass().getCanonicalName());
+        }
+
+    }
+
 }
