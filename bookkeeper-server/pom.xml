@@ -273,16 +273,24 @@
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
         <version>1.5.2</version>
-        <!--FIX configs for mutation coverage -->
         <configuration>
           <targetClasses>
-            <param>org.apache.bookkeeper.client.DeleteMePlease*</param>
+            <param>org.apache.bookkeeper.client.LedgerHandle*</param>
+            <param>org.apache.bookkeeper.client.BookKeeperAdmin*</param>
           </targetClasses>
           <targetTests>
-            <param>org.apache.bookkeeper.client.PitTest*</param>
+            <!-- Test classes for LedgerHandle -->
+            <param>org.apache.bookkeeper.client.LedgerHandleTestSuite</param>
+            <!-- Test classes for LedgerHandle -->
+            <param>org.apache.bookkeeper.client.BookkeeperAdminTestSuite</param>
           </targetTests>
+          <!-- Mutanti -->
+          <mutators>
+            <mutator>CONDITIONALS_BOUNDARY</mutator>
+            <mutator>INCREMENTS</mutator>
+            <mutator>AOR_1</mutator>
+          </mutators>
         </configuration>
-        <!-- execution, qui inserire eventuali altri parametri -->
         <executions>
           <execution>
             <goals>

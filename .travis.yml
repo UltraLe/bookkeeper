@@ -7,5 +7,6 @@ addons:
     organization: "ultrale"
     token: 601e60278def586e544dfb3ff19b6087c9c69e8d
 
+
 script:
   - mvn -Dtest=BookkeeperAdminTestSuite,LedgerHandleTestSuite test -DfailIfNoTests=false org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper
