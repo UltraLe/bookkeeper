@@ -38,13 +38,14 @@ public class LedgerHandleGetNumBookiesTest extends UtilTestClass {
         numBookies = lh.getNumBookies();
         Assert.assertEquals(3, numBookies);
 
-        if(improvedTestSuite){
-            getNumBookieImproved();
-        }
-
     }
 
-    public void getNumBookieImproved() throws Exception {
+    @Test
+    public void getNumBookieImprovedTest() throws Exception {
+
+        if(!improvedTestSuite){
+            return;
+        }
 
         long numBookies;
         LedgerHandle lh = bkc.createLedger(3, 1, digestType, ledgerPassword);
@@ -55,7 +56,7 @@ public class LedgerHandleGetNumBookiesTest extends UtilTestClass {
         LOG.info("After Deleating a bookie");
         Assert.assertNotNull(killBookie(ensemble.get(0)));
         numBookies = lh.getNumBookies();
-        Assert.assertEquals(2, numBookies);
+        Assert.assertEquals(3, numBookies);
 
         //After Adding a bookie
         LOG.info("After Adding a bookie");
@@ -65,8 +66,8 @@ public class LedgerHandleGetNumBookiesTest extends UtilTestClass {
 
         //2 consecutive delete and 2 consecutive add
         LOG.info("2 consecutive delete and 2 consecutive add");
-        Assert.assertNotNull(killBookie(ensemble.get(0)));
         Assert.assertNotNull(killBookie(ensemble.get(1)));
+        Assert.assertNotNull(killBookie(ensemble.get(2)));
         startNewBookie();
         startNewBookie();
         Assert.assertEquals(3, numBookies);

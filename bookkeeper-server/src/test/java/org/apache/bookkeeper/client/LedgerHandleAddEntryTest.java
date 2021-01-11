@@ -118,10 +118,12 @@ public class LedgerHandleAddEntryTest extends UtilTestClass {
 
             Assert.assertTrue(entryId >= 0);
         } catch (Exception e) {
-            //NULL parameter does not pass
-            //Here if handling null entry add
-            //We do not want that a null pointer exception is raised
-            Assert.assertNotEquals("java.lang.NullPointerException", e.getClass().getCanonicalName());
+
+            //We do not want that a null pointer exception is raised, if a null parameter is NOT used
+            if(this.entryToAdd != null){
+                Assert.assertNotEquals("java.lang.NullPointerException", e.getClass().getCanonicalName());
+            }
+
         }
     }
 }
