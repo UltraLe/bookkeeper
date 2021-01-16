@@ -291,7 +291,6 @@
             <mutator>AOR_1</mutator>
           </mutators>
         </configuration>
-        <!--
         <executions>
           <execution>
             <goals>
@@ -299,7 +298,6 @@
             </goals>
           </execution>
         </executions>
-        -->
       </plugin>
 
       <!-- Generating JacocoReport -->
