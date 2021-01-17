@@ -9,4 +9,4 @@ addons:
 
 
 script:
-  - mvn -Dtest=BookkeeperAdminTestSuite,LedgerHandleTestSuite test -DskipPitest=true -DfailIfNoTests=false org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper
+  - mvn -pl .,bookkeeper-server -Dtest=BookkeeperAdminTestSuite,LedgerHandleTestSuite test -DskipPitest=true -DfailIfNoTests=false org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=UltraLe_bookkeeper
